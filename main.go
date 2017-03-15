@@ -39,12 +39,12 @@ func LoadDevices() map[string]*device.Device {
 	return devices
 }
 
-// Setup and the client
+// Setup the client
 func runClient(service micro.Service) {
-	// Create new Dev client
+	// Create new client to call DevSvc service
 	DevClient := device.NewDevSvcClient("DevSvc", service.Client())
 
-	// Call the greeter
+	// Call Get to get a device
 	rsp, err := DevClient.Get(context.TODO(), &device.DeviceName{Name: "device2"})
 	if err != nil {
 		fmt.Println(err)
@@ -61,15 +61,15 @@ func main() {
 		micro.Name("DevSvc"),
 		micro.Version("latest"),
 
+		// we want a --run_client flag to call the service
 		micro.Flags(cli.BoolFlag{
 			Name:  "run_client",
-			Usage: "Launch the client",
+			Usage: "Run as client to get a device",
 		}),
 	)
 
 	service.Init(
-		// Add runtime action
-		// We could actually do this above
+		// when run as client with --run_client then call the service and exit
 		micro.Action(func(c *cli.Context) {
 			if c.Bool("run_client") {
 				runClient(service)
