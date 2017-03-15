@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service DevSvc {
+    rpc Get(DeviceName) returns (Device) {}
+}
+
+message DeviceName {
+    string name = 1;
+}
+
+message Device {
+    string name = 1;
+    bool active = 2;
+}
+
