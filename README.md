@@ -1,13 +1,13 @@
 # go-device
 Device API with Go Micro
 
-To run as server: go run main.go
-To run as client: go run main.go --run_client
+- To run as server: go run main.go
+- To run as client: go run main.go --run_client
 
 Without any parametes, server and client expect Consul to registery or query the service. If you want to run the service and client without any external registries like Consul, use multicast DNS instead like so:
 
-Server: go run main.go --registry mdns
-Client: go run main.go --registry mdns
+- Server: go run main.go --registry mdns
+- Client: go run main.go --registry mdns
 
 The Dockerfile uses the empty scratch image and requires that you build a static exe with the following command:
 
