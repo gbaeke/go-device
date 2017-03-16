@@ -16,3 +16,7 @@ The Dockerfile uses the empty scratch image and requires that you build a static
 To run in a container, you can use environment variables to specify options like the registry to use like so:
 
 `docker run --env MICRO_REGISTRY=mdns image_tag`
+
+To deploy to Kubernetes use:
+
+`kubectl create -f go-device-dep.yaml`
