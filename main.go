@@ -7,6 +7,7 @@ import (
 	device "github.com/gbaeke/go-device/proto"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
+	_ "github.com/micro/go-plugins/registry/kubernetes"
 	"golang.org/x/net/context"
 )
 
