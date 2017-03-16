@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deviceapi
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        editor: vscode
+    spec:
+      containers:
+       - name: device
+         image: gbaeke/go-device
+         env:
+          - name:  MICRO_REGISTRY
+            value:  kubernetes
+          - name: MICRO_SELECTOR
+            value: cache
+          - name: MICRO_SERVER_ADDRESS
+            value: 0.0.0.0:9090
+          - name: MICRO_BROKER_ADDRESS
+            value: 0.0.0.0:9091
