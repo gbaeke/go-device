@@ -18,11 +18,17 @@ type DevSvc struct {
 
 // Get function of service
 func (d *DevSvc) Get(ctx context.Context, req *device.DeviceName, rsp *device.Device) error {
-	fmt.Println("Will respond with ", d.devs[req.Name])
+	device, ok := d.devs[req.Name]
+	if !ok {
+		fmt.Println("Device does not exist")
+		return nil
+	}
+
+	fmt.Println("Will respond with ", device)
 
 	// this also works
-	rsp.Name = d.devs[req.Name].Name
-	rsp.Active = d.devs[req.Name].Active
+	rsp.Name = device.Name
+	rsp.Active = device.Active
 
 	return nil
 }

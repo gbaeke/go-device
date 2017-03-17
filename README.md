@@ -4,7 +4,7 @@ Device API with Go Micro
 - To run as server: go run main.go
 - To run as client: go run main.go --run_client
 
-Without any parametes, server and client expect Consul to registery or query the service. If you want to run the service and client without any external registries like Consul, use multicast DNS instead like so:
+Without any parameters, server and client expect Consul to register or query the service. If you want to run the service and client without any external registries like Consul, use multicast DNS instead like so:
 
 - Server: go run main.go --registry mdns
 - Client: go run main.go --registry mdns

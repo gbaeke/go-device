@@ -7,7 +7,7 @@ spec:
   template:
     metadata:
       labels:
-        editor: vscode
+        app: device
     spec:
       containers:
        - name: device
