@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 
+	"time"
+
 	device "github.com/gbaeke/go-device/proto"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
@@ -49,7 +51,7 @@ func LoadDevices() map[string]*device.Device {
 // Setup the client
 func runClient(service micro.Service) {
 	// Create new client to call DevSvc service
-	DevClient := device.NewDevSvcClient("DevSvc", service.Client())
+	DevClient := device.NewDevSvcClient("go.micro.api.device", service.Client())
 
 	// Call Get to get a device
 	rsp, err := DevClient.Get(context.TODO(), &device.DeviceName{Name: "device2"})
@@ -65,8 +67,10 @@ func runClient(service micro.Service) {
 func main() {
 	// keep it extremely simple for now
 	service := micro.NewService(
-		micro.Name("DevSvc"),
+		micro.Name("go.micro.srv.device"),
 		micro.Version("latest"),
+		micro.RegisterTTL(time.Second*30),
+		micro.RegisterInterval(time.Second*10),
 
 		// we want a --run_client flag to call the service
 		micro.Flags(cli.BoolFlag{
